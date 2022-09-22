@@ -1,0 +1,5 @@
+#include<reg52.h>
+sbit led3 = P1^2; //light the third LED
+void main(){
+led3 = 0;
+}
