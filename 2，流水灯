@@ -1,0 +1,18 @@
+#include <reg52.h>
+#include <intrins.h>
+#define uint unsigned int
+#define uchar unsigned char
+void delay(uint);
+void main(){
+uchar num;
+num = 0x1f; //The order of the lights is LED87654321
+while(1){
+P1 = num;
+delay(500);
+num = _cror_(num,1);
+}
+}
+void delay(uint time){
+uint i, j;
+for(i=time;i>0;i--){for(j=110;j>0;j--);}
+}
