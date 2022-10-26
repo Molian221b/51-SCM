@@ -1,4 +1,4 @@
-// 将delaysms()中的110修改为了11
+// 将delaysms()中的110修改为了11，这将导致数码管出现重影
 
 #include<reg52.h>
 #define uchar unsigned char
