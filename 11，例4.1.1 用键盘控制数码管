@@ -1,3 +1,4 @@
+//这是自己的写法，一切运行正常，12的后续分析是书中写法
 #include <reg52.h>
 #define uchar unsigned char
 #define uint unsigned int
@@ -18,7 +19,7 @@ void init();
 void keyscan();	
 void display(uchar);
 uchar num=0; num_t0=0;
-
+uchar shi=0; ge=0;
 
 void main(){
 	init();
@@ -40,9 +41,9 @@ void init(){
 	ET0 = 1;
 }
 void keyscan(){
-	if(key_S2==1){
+	if(key_S2==0){
 		delayms(10);
-		if(key_S2==1){
+		if(key_S2==0){
 			num++;
 			if(num==60){
 				num=0;
@@ -50,34 +51,32 @@ void keyscan(){
 			while(!key_S2);
 		}
 	}
-	if(key_S3==1){
+	if(key_S3==0){
 		delayms(10);
-		if(key_S3==1){
-			num--;
-			if(num==60){
-				num=0;
+		if(key_S3==0){
+			if(num==0){
+				num=60;
 			}
+			num--;
 			while(!key_S3);
 		}
 	}
-	if(key_S4==1){
+	if(key_S4==0){
 		delayms(10);
-		if(key_S4==1){
+		if(key_S4==0){
 			num=0;
 			while(!key_S4);
 		}
 	}
-	if(key_S5==1){
+	if(key_S5==0){
 		delayms(10);
-		if(key_S5==1){
+		if(key_S5==0){
 			TR0 = ~TR0;
 			while(!key_S5);
 		}
 	}
 }
 void display(uchar num){
-	uchar shi=0; 
-	uchar ge=0;
 	shi = num/10;
 	ge = num%10;
 	
@@ -106,7 +105,7 @@ void T0_time() interrupt 1{
 		num_t0 = 0;
 		num++;
 		if(num==60){
-		num=0;
+			num=0;
 		}
 	}
 }
