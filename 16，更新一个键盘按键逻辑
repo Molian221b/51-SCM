@@ -1,0 +1,20 @@
+// 为了防止按键抖动，我们希望逻辑是  按下去→延迟20ms→直到松开才运行相应代码→类似于窗口最大化最小化，放开鼠标才会响应
+
+#include <reg52.h>
+#define uint unsigned int
+sbit button = P3^2; //the third button
+sbit light = P1^0;
+void delayms(uint);
+void main(){
+	while(1){
+		if(button==0){
+				delayms(20);
+				while(button==0);
+				light = ~light;
+		}
+	}
+}
+void delayms(uint xms){
+uint i,j;
+for(i=xms;i>0;i--){for(j=110;j>0;j--);}
+}
