@@ -1,0 +1,42 @@
+//两种键盘设计方式
+//1，pressKey为按下键（还未抬起）便运行代码
+//2，releaseKey为抬起按键时再运行代码
+
+#include <reg52.h>
+sbit led3 = P1^2;
+sbit key = P3^0;
+void delayms(unsigned);
+void pressKey();
+void releaseKey();
+void main(){
+	while(1){
+//		pressKey();
+		releaseKey();
+	}
+}
+void pressKey(){
+		if(key==0){
+		delayms(10);
+		if(key==0){led3 = ~led3;}
+		while(!key);
+		}
+}
+
+void releaseKey(){
+		if(key==0){
+		delayms(10);
+		if(key==0){while(key==0);led3 = ~led3;}
+		}
+}
+
+void delayms(unsigned int xms)		//@12.000MHz
+{
+	unsigned char i, j;
+	while(xms--){
+		i = 2;
+		j = 239;
+		do{
+			while(--j);
+		}while(--i);
+	}
+}
